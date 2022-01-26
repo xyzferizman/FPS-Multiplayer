@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    public float mouseSensitivity = 20f;
+    public float mouseSensitivity = 125f;
 
     public Transform playerBody;
     public Transform gun;

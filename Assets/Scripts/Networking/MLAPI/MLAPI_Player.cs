@@ -9,7 +9,6 @@ using System.Collections.Generic;
 
 public class MLAPI_Player : NetworkBehaviour
 {
-    private PlayerLook lookScript;
     private PlayerMove moveScript;
     private PlayerShoot shootScript;
     private Camera camera;
@@ -57,9 +56,8 @@ public class MLAPI_Player : NetworkBehaviour
     {
         camera = GetComponentInChildren<Camera>();
         moveScript = GetComponent<PlayerMove>();
-        lookScript = GetComponentInChildren<PlayerLook>();
         shootScript = GetComponentInChildren<PlayerShoot>();
-        healthBarTransform = GetComponentInChildren<HealthBarScript>().transform;
+        healthBarTransform = GetComponentInChildren<HealthBar>().transform;
         netObj = GetComponent<NetworkObject>();
         respawner = FindObjectOfType<Respawn>();
 
@@ -103,55 +101,6 @@ public class MLAPI_Player : NetworkBehaviour
         Health.OnValueChanged += UpdateHealthBar;
     }
 
-    //private void OnGUI()
-    //{
-    //    if ( !IsServer )
-    //    {
-    //        if (IsLocalPlayer)
-    //        {
-    //            GUILayout.BeginArea(new Rect(10, 10, 300, 300));
-    //            if (GUILayout.Button("CLICK ON THIS BUTTON TO TEST RPCS")) Test123Rpcs();
-    //            if (GUILayout.Button("CALCULATE AVERAGE")) CalcAverage();
-    //            GUILayout.EndArea();
-    //        }
-    //    }
-         
-        
-    //}
-
-    //int numberOfClicks = 0;
-
-    //void Test123Rpcs()
-    //{
-    //    if ( !IsServer )
-    //    {
-    //        myNetGameManager.time11 = Time.realtimeSinceStartupAsDouble;
-    //        myNetGameManager.Test_ServerRpc();
-    //        numberOfClicks++;
-    //    }
-             
-    //}
-
-    //void CalcAverage()
-    //{
-    //    double total = 0;
-    //    foreach ( double value in myNetGameManager.listOfRPCRoundTimes )
-    //    {
-    //        total += value / 2;
-    //    }
-    //    double avg = total / numberOfClicks;
-    //    Debug.Log("average rpc 1-direction time is = " + avg);
-    //}
-
-    //private void Update()
-    //{
-    //    if ( !IsLocalPlayer )
-    //    {
-    //        // nadji ownera i okreni health bar prema njemu
-    //    }
-    //}
-
-
     private void OnCollisionEnter(Collision collision)
     {        
         if ( IsServer)
@@ -174,7 +123,7 @@ public class MLAPI_Player : NetworkBehaviour
 
     void RandomizePosition()
     {
-        Vector3 randomPosition = new Vector3(Random.Range(-14f,14f),1f, Random.Range(-14f, 14f));
+        Vector3 randomPosition = new Vector3(Random.Range(-34f,34f),1f, Random.Range(-34f, 34f));
         float randomYRotation = Random.Range(0f,360f);
 
         transform.position = randomPosition;
@@ -213,7 +162,7 @@ public class MLAPI_Player : NetworkBehaviour
         GameObject projectile = Instantiate(myPrefab, position, Quaternion.identity);
         projectile.GetComponent<Rigidbody>().velocity = velocity;
         // can only be called from the server
-        projectile.GetComponent<NetworkObject>().Spawn();   
+        projectile.GetComponent<NetworkObject>().Spawn();
     }
    
     void UpdateHealthBar(float prevHealth, float nextHealth)
@@ -280,7 +229,6 @@ public class MLAPI_Player : NetworkBehaviour
 
             //Debug.Log("server rpc should be called");
             respawner.InitializeRespawnCountdown();
-
         }            
     }
 }

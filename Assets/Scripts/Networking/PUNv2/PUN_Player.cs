@@ -45,7 +45,7 @@ public class PUN_Player : MonoBehaviourPunCallbacks//, IPunOwnershipCallbacks
         moveScript = GetComponent<PlayerMove>();
         lookScript = GetComponentInChildren<PlayerLook>();
         shootScript = GetComponentInChildren<PlayerShoot>();        
-        healthBarTransform = GetComponentInChildren<HealthBarScript>().transform;
+        healthBarTransform = GetComponentInChildren<HealthBar>().transform;
         respawner = FindObjectOfType<Respawn>();
         recentlyCollidedWith = new HashSet<int>();
 

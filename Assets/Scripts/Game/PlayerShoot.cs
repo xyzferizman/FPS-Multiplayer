@@ -3,8 +3,10 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public GameObject projectilePrefab;
+    public float speed = 20f;
+    public float damageMultiplier = 1.5f;
+    public float damageBoostDuration = 5f;
 
-    private float speed = 12f;
     private Transform cameraTransform;
 
     private MLAPI_Player myMlapiPlayer;
@@ -13,11 +15,15 @@ public class PlayerShoot : MonoBehaviour
 
     private float cooldownTime = 0.25f;
     private float lastShootTime = -0.15f;
-
+    private float damage = 10f;
     private string myNetType;
+
+    private AudioSource audioSource;
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         cameraTransform = transform.parent.GetComponentInChildren<Camera>().transform;
         if ( cameraTransform == null )
         {
@@ -59,6 +65,8 @@ public class PlayerShoot : MonoBehaviour
 
             lastShootTime = Time.realtimeSinceStartup;
 
+            audioSource.Play();
+
             if ( myNetType == "mlapi")
             {
                 myMlapiPlayer.NetworkShoot(speed);
@@ -74,5 +82,19 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    
+    float startTime_damage;
+
+    internal void GetDamageBoost()
+    {
+        damage *= damageMultiplier;
+        Invoke("RemoveDamageBoost", damageBoostDuration);
+        Debug.Log("Damage boost added, damage is now " + damage);
+        startTime_damage = Time.time;
+    }
+
+    private void RemoveDamageBoost()
+    {
+        damage /= damageMultiplier;
+        Debug.Log("Damage boost removed, damage is now " + damage + " time elapsed = " + (Time.time - startTime_damage));
+    }
 }

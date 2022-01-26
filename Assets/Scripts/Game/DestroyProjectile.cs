@@ -17,7 +17,10 @@ public class DestroyProjectile : NetworkBehaviour
     }
 
     private void OnCollisionEnter(Collision collision)
-    {        
+    {
+        //if ( collision.collider.tag == "Gun" )
+        //    Debug.Log("collided with gun");
+
         if ( netType.Equals("mlapi") )
         {
             if (IsServer)

@@ -275,7 +275,7 @@ public class TransportClient : MonoBehaviour
 
                         // Receive health
                         currentPlayer.health = stream.ReadFloat();
-                        currentPlayer.GetComponentInChildren<HealthBarScript>().transform.localScale = new Vector3(currentPlayer.health / 100f, 0.15f, 0.01f);
+                        currentPlayer.GetComponentInChildren<HealthBar>().transform.localScale = new Vector3(currentPlayer.health / 100f, 0.15f, 0.01f);
                         //Debug.Log("Client: READING health = " + currentPlayer.health);
 
                         //currentPlayer.SetUpdated();

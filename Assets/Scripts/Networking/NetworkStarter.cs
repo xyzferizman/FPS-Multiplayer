@@ -6,8 +6,6 @@ public class NetworkStarter : MonoBehaviour
     public CheckForTransportServer transportScript;
     public PUN_Starter pun_starterScript;
 
-    public double time1;
-
     private void Start()
     {
         string netType = PlayerPrefs.GetString("networkType");
@@ -16,7 +14,8 @@ public class NetworkStarter : MonoBehaviour
         //netType = "transport";
         //PlayerPrefs.SetString("networkType","transport");
 
-        
+        // hardcoded poslije diplomskog
+        netType = "mlapi";
 
         if ( netType.Equals("mlapi"))
         {
@@ -24,16 +23,16 @@ public class NetworkStarter : MonoBehaviour
             //    time1 = Time.realtimeSinceStartupAsDouble;
             //NetworkManager.Singleton.gameObject.SetActive(true);
             // pokusaj se spojiti na server/hosta kao client            
+            Debug.Log("mlapi chosen");
             NetworkManager.Singleton.StartClient();
 
             // ako nejde, postani host na kojeg se moze spojiti (PRETPOSTAVKA: ako nejde, nema servera/hosta)
             Invoke("CheckIfClientConnected",2f);
         }
         else if ( netType.Equals("transport"))
-        {
-            if (!Application.isEditor)
-                time1 = Time.realtimeSinceStartupAsDouble;
+        {            
             // start transport
+            Debug.Log("transport chosen, enabling starter script");
             transportScript.enabled = true;
         }
         else if ( netType.Equals("pun_v2"))
@@ -50,6 +49,7 @@ public class NetworkStarter : MonoBehaviour
         }
     }
 
+    // ovo je bad coding practice, trebalo bi premjestit u MLAPI-specific kod, ne u ovaj "general" kod
     private void CheckIfClientConnected()   // za mlapi
     {
         Debug.Log("check if client connected");

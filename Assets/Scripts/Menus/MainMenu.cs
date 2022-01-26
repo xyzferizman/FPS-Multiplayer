@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class NewMenuScript : MonoBehaviour
+public class MainMenu : MonoBehaviour
 {
     public Dropdown dropdown;
     public Text label;
@@ -52,8 +52,22 @@ public class NewMenuScript : MonoBehaviour
                 Debug.LogError("wrong dropdown index in NewMenuScript");
                 break;
         }
+
+        // hardcoded prilagodba (nakon diplomskog)
+        netType = "mlapi";
+
         PlayerPrefs.SetString("networkType",netType);
 
         SceneManager.LoadScene(1);
+    }
+
+    public void ConfigurationButton_Click()
+    {
+        // TODO
+    }
+
+    public void QuitGameButton_Click()
+    {
+        Application.Quit();
     }
 }

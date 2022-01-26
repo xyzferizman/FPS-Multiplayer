@@ -5,7 +5,7 @@ using MLAPI.Messaging;
 using MLAPI.Connection;
 using MLAPI.Spawning;
 using System.Collections.Generic;
-
+ 
 public class NetworkGameManager : NetworkBehaviour
 {
     private Text countdownText;

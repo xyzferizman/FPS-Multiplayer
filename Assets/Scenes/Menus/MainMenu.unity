@@ -3784,9 +3784,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1156542643}
         m_TargetAssemblyTypeName: NewMenuScript, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: ConfigurationButton_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3795,7 +3795,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1522219386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4222,9 +4222,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1156542643}
         m_TargetAssemblyTypeName: NewMenuScript, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: QuitGameButton_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4233,7 +4233,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 0
+        m_CallState: 2
 --- !u!114 &1710039016
 MonoBehaviour:
   m_ObjectHideFlags: 0

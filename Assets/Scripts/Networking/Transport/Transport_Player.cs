@@ -24,7 +24,6 @@ public class Transport_Player : MonoBehaviour
             time2 = Time.realtimeSinceStartupAsDouble;
 
         ns = FindObjectOfType<NetworkStarter>();
-        time1 = ns.time1;
 
         Debug.Log("Time for spawning Transport player = " + 1000 * (time2 - time1) + "ms");
     }
@@ -51,7 +50,7 @@ public class Transport_Player : MonoBehaviour
 
         transportSpawner = FindObjectOfType<TransportSpawner>();
 
-        healthBarTransform = GetComponentInChildren<HealthBarScript>().transform;
+        healthBarTransform = GetComponentInChildren<HealthBar>().transform;
     }
 
     internal void SetUpdated()
