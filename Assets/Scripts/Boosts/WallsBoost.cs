@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 
-class SpeedBoost : Boost
-{    
-    public SpeedBoost()
+class WallsBoost : Boost
+{
+    public WallsBoost()
     {
         isStackable = false;
-        duration = 3f;
+        duration = 4f;
     }
 }
+

@@ -1,4 +1,4 @@
-﻿enum PickupTypes
+﻿public enum BoostType
 {
     Speed, 
     Damage, 

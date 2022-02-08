@@ -10,7 +10,7 @@ public class PickupController : MonoBehaviour
     GameObject collidedPlayerObj;
 
     [SerializeField]
-    PickupTypes pickupType;
+    BoostType boostType;
 
     private void Start()
     {
@@ -34,14 +34,14 @@ public class PickupController : MonoBehaviour
             BoostController bc = collidedPlayerObj.GetComponent<BoostController>();
             //
 
-            if ( pickupType == PickupTypes.Speed )
-                bc.GetBoost("speed");   
+            if ( boostType == BoostType.Speed )
+                bc.GetBoost(BoostType.Speed);
             
-            else if (pickupType == PickupTypes.Damage)
-                bc.GetBoost("damage");
+            else if (boostType == BoostType.Damage)
+                bc.GetBoost(BoostType.Damage);
             
-            else if (pickupType == PickupTypes.Walls)
-                bc.GetBoost("walls");
+            else if (boostType == BoostType.Walls)
+                bc.GetBoost(BoostType.Walls);
 
             // destroy pickup object
             Destroy(gameObject);

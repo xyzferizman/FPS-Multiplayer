@@ -7,7 +7,7 @@ public class BoostController : MonoBehaviour
     private PlayerMove playerMove;
     private PlayerLook playerLook;
 
-    private Dictionary<Boost, int> boostDict = new Dictionary<Boost, int>();
+    private Dictionary<BoostType, int> boostDict = new Dictionary<BoostType, int>();
 
     // mozda ove varijable upakirati u nekakav "Boost" tip podatka, pa onda specijalizacija u "SpeedBoost", "WallBoost" itd.
     public float speedBoostFactor = 1.5f;
@@ -18,28 +18,45 @@ public class BoostController : MonoBehaviour
         playerShoot = GetComponent<PlayerShoot>();
         playerMove = GetComponent<PlayerMove>();
         playerLook = GetComponent<PlayerLook>();
+
+        boostDict.Add(BoostType.Speed, 0);
+        boostDict.Add(BoostType.Damage, 0);
+        boostDict.Add(BoostType.Walls, 0);
     }
 
-    public void GetBoost(string boostName)
+    public void GetBoost(BoostType bt)
     {
         // TODO
-        if ( boostName.Equals("speed") )
+        if ( bt.Equals(BoostType.Speed) )
         {
             Boost newSpeedBoost = new SpeedBoost();
             //GetComponent<PlayerMove>().GetSpeedBoost();
 
-            playerMove.movementSpeed *= speedBoostFactor;
-            Debug.Log("Speed boost added, speed is now " + playerMove.movementSpeed);
+            // ako nije stackable i vec je aktivan, izadji
+            if (!newSpeedBoost.isStackable && boostDict[BoostType.Speed] > 0)
+                return;
+
+            //GiveSpeedBoost();
+            boostDict[BoostType.Speed]++;
+
+            //playerMove.movementSpeed *= speedBoostFactor;
+            //Debug.Log("Speed boost added, speed is now " + playerMove.movementSpeed);
             // RemoveBoost nakon x sekundi
         }
-        else if (boostName.Equals("damage"))
+        else if ( bt.Equals(BoostType.Damage) )
         {
             //GetComponent<PlayerShoot>().GetDamageBoost();            
         }
-        else if (boostName.Equals("walls"))
+        else if ( bt.Equals(BoostType.Walls) )
         {
             //GetComponent<PlayerMove>().GetWallBoost();
         }
+    }
+
+    // SPEED BOOST
+    private void GetSpeedBoost()
+    {
+
     }
 }
 
