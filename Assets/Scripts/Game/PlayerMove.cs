@@ -1,5 +1,4 @@
 using UnityEngine;
-using MLAPI.NetworkVariable;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -10,18 +9,15 @@ public class PlayerMove : MonoBehaviour
     private float playerHalfHeight;
     private float mouseXInput, mouseZInput;
     private float checkSphereRadius = 0.15f;
-    private float speedBoostFactor = 1.5f;
-    private float speedBoostDuration = 3f;
-    private float wallsBoostDuration = 4f;
-    private bool canGoThroughWalls = false;
-
-    private float lastUpdateY;
     
     public LayerMask groundMask;    
     public Transform groundCheck;
     public float gravity = -15f;
     public float movementSpeed = 10f;
     public float jumpInitialSpeed = 10f;
+    public bool canGoThroughWalls = false;
+
+    public readonly float baseMovementSpeed = 10f;
     
     private void Start()
     {
@@ -81,36 +77,9 @@ public class PlayerMove : MonoBehaviour
         return ret;
     }
 
-    float startTime_speed;
-    float startTime_walls;
-
-    internal void GetSpeedBoost()
-    {
-        movementSpeed *= speedBoostFactor;
-        Invoke("RemoveSpeedBoost", speedBoostDuration);
-        Debug.Log("Speed boost added, speed is now " + movementSpeed);
-        startTime_speed = Time.time;        
-    }
     
-    internal void GetWallBoost()
-    {
-        canGoThroughWalls = true;
-        Invoke("RemoveWallsBoost", wallsBoostDuration);
-        Debug.Log("Walls boost added");
-        startTime_walls = Time.time;
-    }
 
-    void RemoveSpeedBoost()
-    {
-        movementSpeed /= speedBoostFactor;
-        Debug.Log("Speed boost removed, speed is now " + movementSpeed + " time elapsed = " + (Time.time - startTime_speed));
-    }
-
-    void RemoveWallsBoost()
-    {
-        canGoThroughWalls = false;
-        Debug.Log("Walls boost removed, time elapsed = " + (Time.time - startTime_walls));
-    }
+    
 
     
 }

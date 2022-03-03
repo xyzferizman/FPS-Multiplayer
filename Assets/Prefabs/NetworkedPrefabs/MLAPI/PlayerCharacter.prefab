@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 2556826501951830021}
   - component: {fileID: 221147467762015125}
   - component: {fileID: 785228635021539295}
+  - component: {fileID: 6526847124067448211}
   m_Layer: 0
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -459,6 +460,7 @@ MonoBehaviour:
   gravity: -20
   movementSpeed: 10
   jumpInitialSpeed: 10
+  canGoThroughWalls: 0
 --- !u!143 &6334993056002125738
 CharacterController:
   m_ObjectHideFlags: 0
@@ -566,6 +568,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e798a5d2c8b143746b98f8f56615bbd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6526847124067448211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6334993056002125779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3035928715d21cc479a2cef4da37a449, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6334993056388866667
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,7 +595,7 @@ GameObject:
   - component: {fileID: 1892465540}
   - component: {fileID: 7361662153215758585}
   - component: {fileID: 3204768573330269288}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gun
   m_TagString: Gun
   m_Icon: {fileID: 0}
@@ -678,7 +692,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7028632297787546655, guid: 63a5b2824cd6a354a8962bd3424cc5d1, type: 3}
-  speed: 20
+  projectileSpeed: 20
+  damage: 10
 --- !u!114 &7361662153215758585
 MonoBehaviour:
   m_ObjectHideFlags: 0

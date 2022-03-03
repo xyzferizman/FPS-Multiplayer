@@ -1,6 +1,6 @@
 ﻿public enum BoostType
 {
-    Speed, 
-    Damage, 
+    Speed,
+    Damage,
     Walls
 }

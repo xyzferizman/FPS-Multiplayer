@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Testing.CSharpTesting
 {
@@ -35,9 +36,15 @@ namespace Assets.Scripts.Testing.CSharpTesting
             someVariable = b;
         }
 
+        public override void Func1()
+        {
+            base.Func1();
+            Debug.Log("drugi override bazne metode Func1");
+        }
+
         public void Ispis() // zasto se ne buni za public metodu u internal klasi ?
         {
-            Console.WriteLine(someVariable);
+            Debug.Log(someVariable);
         }
     }
 }

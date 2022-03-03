@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public GameObject projectilePrefab;
-    public float speed = 20f;
-    public float damageMultiplier = 1.5f;
-    public float damageBoostDuration = 5f;
+    public float projectileSpeed = 20f;
+    public float damage = 10f;
+    public readonly float baseDamage = 10f;
 
     private Transform cameraTransform;
 
@@ -15,7 +15,7 @@ public class PlayerShoot : MonoBehaviour
 
     private float cooldownTime = 0.25f;
     private float lastShootTime = -0.15f;
-    private float damage = 10f;
+    
     private string myNetType;
 
     private AudioSource audioSource;
@@ -69,32 +69,16 @@ public class PlayerShoot : MonoBehaviour
 
             if ( myNetType == "mlapi")
             {
-                myMlapiPlayer.NetworkShoot(speed);
+                myMlapiPlayer.NetworkShoot(projectileSpeed);
             }
             else if ( myNetType == "pun_v2")
             {
-                myPunPlayer.NetworkShoot(speed);
+                myPunPlayer.NetworkShoot(projectileSpeed);
             }
             else if ( myNetType == "transport" )
             {
-                myTransportPlayer.NetworkShoot(speed);
+                myTransportPlayer.NetworkShoot(projectileSpeed);
             }
         }
-    }
-
-    float startTime_damage;
-
-    internal void GetDamageBoost()
-    {
-        damage *= damageMultiplier;
-        Invoke("RemoveDamageBoost", damageBoostDuration);
-        Debug.Log("Damage boost added, damage is now " + damage);
-        startTime_damage = Time.time;
-    }
-
-    private void RemoveDamageBoost()
-    {
-        damage /= damageMultiplier;
-        Debug.Log("Damage boost removed, damage is now " + damage + " time elapsed = " + (Time.time - startTime_damage));
     }
 }

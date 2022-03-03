@@ -32,8 +32,7 @@ public class PickupController : MonoBehaviour
             // apply boost
             collidedPlayerObj = other.gameObject;
             BoostController bc = collidedPlayerObj.GetComponent<BoostController>();
-            //
-
+            
             if ( boostType == BoostType.Speed )
                 bc.GetBoost(BoostType.Speed);
             

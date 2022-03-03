@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Testing.CSharpTesting
 {
@@ -12,14 +13,14 @@ namespace Assets.Scripts.Testing.CSharpTesting
 
         public virtual void Func1()
         {
-            Console.WriteLine("default Func1 implementation");
+            Debug.Log("default Func1 implementation");
         }
 
         public abstract void Func2();
 
         public virtual void Func3()
         {
-            Console.WriteLine("default Func3 implementation");
+            Debug.Log("default Func3 implementation");
         }
     }
 }
