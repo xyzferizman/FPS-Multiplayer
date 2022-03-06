@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6441753875330073615}
   - component: {fileID: 7712299433309733753}
   - component: {fileID: 2463229123737204061}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4962016811252005791}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   - component: {fileID: 6334993055781387282}
   - component: {fileID: 6334993055781387284}
   - component: {fileID: 4551380076130643070}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 221147467762015125}
   - component: {fileID: 785228635021539295}
   - component: {fileID: 6526847124067448211}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}

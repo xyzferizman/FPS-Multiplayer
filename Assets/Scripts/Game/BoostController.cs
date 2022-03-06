@@ -31,19 +31,19 @@ public class BoostController : MonoBehaviour
     {
         if ( bt.Equals(BoostType.Speed) )
         {
-            Debug.Log("Speed Boost picked up.");
+            //Debug.Log("Speed Boost picked up.");
             
             newBoost = gameObject.AddComponent<SpeedBoost>();
         }
         else if ( bt.Equals(BoostType.Damage) )
         {
-            Debug.Log("Damage Boost picked up.");
+            //Debug.Log("Damage Boost picked up.");
 
             newBoost = gameObject.AddComponent<DamageBoost>();
         }
         else if ( bt.Equals(BoostType.Walls) )
         {
-            Debug.Log("Walls Boost picked up.");
+            //Debug.Log("Walls Boost picked up.");
             
             newBoost = gameObject.AddComponent<WallsBoost>();
         }

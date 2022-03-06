@@ -18,13 +18,14 @@ class WallsBoost : Boost
         if (boostDict[myBoostType] == 0)
         {
             playerMove.canGoThroughWalls = true;
+            playerMove.AllowMovingThroughWalls();
             Debug.Log("Walls Boost applied. Time = " + startTime);
             boostDict[myBoostType]++;
 
             Invoke(nameof(RemoveBoost), duration);
 
-            Debug.Log("Walls Boost Count = " + boostDict[myBoostType]);
-            Debug.Log("----------------------");
+            //Debug.Log("Walls Boost Count = " + boostDict[myBoostType]);
+            //Debug.Log("----------------------");
         }
         // inace produzi trajanje boosta (RemoveBoost metoda se brine za to)
         else
@@ -39,13 +40,14 @@ class WallsBoost : Boost
 
         // TODO
 
-        Debug.Log("Walls Boost removed. Time = " + Time.time);
         playerMove.canGoThroughWalls = false;
+        playerMove.DisableGoingThroughWalls();
+        Debug.Log("Walls Boost removed. Time = " + Time.time);
         Destroy(this);
 
         boostDict[myBoostType]--;
-        Debug.Log("Walls Boost Count = " + boostDict[myBoostType]);
-        Debug.Log("----------------------");
+        //Debug.Log("Walls Boost Count = " + boostDict[myBoostType]);
+        //Debug.Log("----------------------");
     }
 }
 

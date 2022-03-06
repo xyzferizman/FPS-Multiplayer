@@ -19,7 +19,7 @@ public class PlayerMove : MonoBehaviour
 
     public readonly float baseMovementSpeed = 10f;
     
-    private void Start()
+    private void Start() 
     {
         playerHalfHeight = playerHeight / 2f;
         velocityY = new Vector3(0f,0f,0f);
@@ -33,7 +33,7 @@ public class PlayerMove : MonoBehaviour
 
     // Update is called once per frame
     private void Update()
-    {      
+    {
         if ( AboveGround() )
         {
             //Debug.Log("ABOVE GROUND");
@@ -64,6 +64,14 @@ public class PlayerMove : MonoBehaviour
         //    controller.Move( new Vector3(0f, -(transform.position.y - playerHalfHeight), 0f));
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if ( hit.gameObject.layer == 6 )
+        {
+            Debug.Log("Controller Collision with Obstacle");
+        }
+    }
+
     private void ApplyGravityFall()
     {
         velocityY += Vector3.up * gravity * Time.deltaTime;
@@ -77,9 +85,41 @@ public class PlayerMove : MonoBehaviour
         return ret;
     }
 
-    
+    public void AllowMovingThroughWalls()
+    {
+        Physics.IgnoreLayerCollision(6, 7, true);
+    }
 
-    
+    public void DisableGoingThroughWalls()
+    {
+        // eventualni kod za pozicioniranje lika izvan objekta prije nego se kolizije opet aktiviraju
 
-    
+        #region Solution #1 - instant snap
+
+        #region Solution 1.1 - instant snap u tocku odmah izvan collidera, na pravcu od Player Objecta do najblize tocke collidera
+
+        //if (hitToTest.collider.bounds.Contains(telePosition))
+        //{
+        //    print("point is inside collider");
+        //}
+
+        bool isUnutarObstacleObjekta = false;   // treba ovo nekako odrediti
+
+        if (isUnutarObstacleObjekta )
+
+        #endregion
+
+        #endregion
+
+
+#endregion
+
+        #region Solution #2 - lerping
+
+
+
+        #endregion
+
+        Physics.IgnoreLayerCollision(6, 7, false);
+    }
 }

@@ -22,7 +22,7 @@ public abstract class Boost : MonoBehaviour
 
     internal virtual void SetUnityRelatedStuff()
     {
-        Debug.Log("Boost, SetUnityRelatedStuff");
+        //Debug.Log("Boost, SetUnityRelatedStuff");
                 
         boostController = GetComponent<BoostController>();
 
