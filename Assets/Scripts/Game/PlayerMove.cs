@@ -31,17 +31,14 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     private void Update()
     {
         if ( AboveGround() )
         {
-            //Debug.Log("ABOVE GROUND");
             ApplyGravityFall();
         }
         else
         {
-            //Debug.Log("MOVE NORMALLY");
             mouseXInput = Input.GetAxis("Horizontal");
             mouseZInput = Input.GetAxis("Vertical");
 
@@ -63,15 +60,7 @@ public class PlayerMove : MonoBehaviour
         //if ( !AboveGround() && transform.position.y == lastUpdateY)
         //    controller.Move( new Vector3(0f, -(transform.position.y - playerHalfHeight), 0f));
     }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        if ( hit.gameObject.layer == 6 )
-        {
-            Debug.Log("Controller Collision with Obstacle");
-        }
-    }
-
+    
     private void ApplyGravityFall()
     {
         velocityY += Vector3.up * gravity * Time.deltaTime;
@@ -98,21 +87,34 @@ public class PlayerMove : MonoBehaviour
 
         #region Solution 1.1 - instant snap u tocku odmah izvan collidera, na pravcu od Player Objecta do najblize tocke collidera
 
-        //if (hitToTest.collider.bounds.Contains(telePosition))
-        //{
-        //    print("point is inside collider");
-        //}
+        #region determiniranje jeli Player Object u collideru
 
-        bool isUnutarObstacleObjekta = false;   // treba ovo nekako odrediti
+        bool dodirujeCollider = false;
+        bool isUnutarObstacleObjekta = false;
+        if ( dodirujeCollider)
+        {
 
-        if (isUnutarObstacleObjekta )
+        }
+        else if ( isUnutarObstacleObjekta )
+        {
+
+        }
+
+
 
         #endregion
 
+        Rigidbody rb;
+        CharacterController charContr = GetComponent<CharacterController>();
+           // treba ovo nekako odrediti
+
+        if ( isUnutarObstacleObjekta )
+        {
+            //c.ClosestPoint
+        }
         #endregion
 
-
-#endregion
+        #endregion
 
         #region Solution #2 - lerping
 

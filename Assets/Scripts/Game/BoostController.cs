@@ -44,8 +44,11 @@ public class BoostController : MonoBehaviour
         else if ( bt.Equals(BoostType.Walls) )
         {
             //Debug.Log("Walls Boost picked up.");
-            
-            newBoost = gameObject.AddComponent<WallsBoost>();
+
+            // !!! zakomentirano do daljnjega jer je Walls Boost feature odgodjen !!!
+
+            //newBoost = gameObject.AddComponent<WallsBoost>();
+            return;
         }
         else
             Debug.LogError("Custom Error: unfamiliar boost type = " + bt.ToString());

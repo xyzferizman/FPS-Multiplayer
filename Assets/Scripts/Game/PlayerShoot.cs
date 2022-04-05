@@ -58,7 +58,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButton(0))
         {
             if ((Time.realtimeSinceStartup - lastShootTime) < cooldownTime)
                 return;

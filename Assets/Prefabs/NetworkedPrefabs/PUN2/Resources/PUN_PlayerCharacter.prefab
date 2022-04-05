@@ -221,7 +221,6 @@ GameObject:
   - component: {fileID: 6334993056002125780}
   - component: {fileID: 6334993056002125738}
   - component: {fileID: 6334993056002125737}
-  - component: {fileID: 785228635021539295}
   - component: {fileID: -5027562475372149171}
   - component: {fileID: 5260237673963240835}
   - component: {fileID: 3659811011558664635}
@@ -343,21 +342,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a89d42ea8b748447848d54d2d66ad22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 0}
   gravity: -20
   movementSpeed: 10
   jumpInitialSpeed: 10
---- !u!114 &785228635021539295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6334993056002125779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e798a5d2c8b143746b98f8f56615bbd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  canGoThroughWalls: 0
 --- !u!114 &-5027562475372149171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +372,6 @@ MonoBehaviour:
   - {fileID: 5260237673963240835}
   - {fileID: 8689688812623021996}
   - {fileID: 7707700399674255435}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -556,6 +547,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7028632297787546655, guid: 63a5b2824cd6a354a8962bd3424cc5d1, type: 3}
+  projectileSpeed: 20
+  damage: 10
 --- !u!114 &7707700399674255435
 MonoBehaviour:
   m_ObjectHideFlags: 0

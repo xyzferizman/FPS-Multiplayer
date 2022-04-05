@@ -14,7 +14,7 @@ public class Respawn : MonoBehaviour
 
     private void Start()
     {
-        UIPanel = FindObjectOfType<RespawnUI>().gameObject;
+        UIPanel = GameObject.FindGameObjectWithTag("Respawn");
         countdownText = UIPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
         respawnButton = UIPanel.transform.GetChild(1).gameObject.GetComponent<Button>();
         netType = PlayerPrefs.GetString("networkType");
@@ -62,7 +62,5 @@ public class Respawn : MonoBehaviour
             // respawn player
             Debug.Log("Transport respawn should happen");
         }
-        
-        
     }
 }

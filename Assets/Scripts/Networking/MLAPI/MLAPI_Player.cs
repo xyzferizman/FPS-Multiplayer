@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 using MLAPI;
 using MLAPI.NetworkVariable;
@@ -52,6 +53,20 @@ public class MLAPI_Player : NetworkBehaviour
         gameManager.GetComponent<NetworkObject>().Spawn();
     }
 
+    // moja custom funkcija spojena na callback OnClientDisconnectCallback
+    // OnClientDisconnectCallback se zove na klijentu AKO:
+        // 1) server proaktivno disconnectao klijenta
+        // 2) server se shut downao
+    void OnClientDisconnected(ulong clientid)
+    {
+        if ( IsClient )
+        {
+            SceneManager.LoadScene(0);  // ucitaj main menu
+            Debug.Log("You got disconnected by the server or server shutdown happened.");
+        }
+        
+    }
+
     public override void NetworkStart()
     {
         camera = GetComponentInChildren<Camera>();
@@ -61,6 +76,8 @@ public class MLAPI_Player : NetworkBehaviour
         netObj = GetComponent<NetworkObject>();
         respawner = FindObjectOfType<Respawn>();
 
+        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+
         if ( !IsLocalPlayer )
         { 
             Destroy(camera.gameObject);
@@ -69,6 +86,8 @@ public class MLAPI_Player : NetworkBehaviour
         }
         else // if local player
         {
+            FindObjectOfType<CursorLocking>().SetLocalPlayer(gameObject);
+
             myNetGameManager = FindObjectOfType<NetworkGameManager>();
             if (myNetGameManager == null && IsServer)
             {

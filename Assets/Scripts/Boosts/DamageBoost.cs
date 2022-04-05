@@ -26,28 +26,28 @@ class DamageBoost : Boost
         // nema uvjeta kao kod Speed Boost jer je Damage Boost stackable
         playerShoot.damage += damageBoostAddition;
 
-        Debug.Log("Damage boost added, Time = " + Time.time);
+        //Debug.Log("Damage boost added, Time = " + Time.time);
         startTime = Time.time;
 
         Invoke(nameof(RemoveBoost), duration);
         boostDict[myBoostType]++;
-        Debug.Log("Damage Boost Count = " + boostDict[myBoostType]);
-        Debug.Log("Damage = " + playerShoot.damage);
-        Debug.Log("----------------------");
+        //Debug.Log("Damage Boost Count = " + boostDict[myBoostType]);
+        //Debug.Log("Damage = " + playerShoot.damage);
+        //Debug.Log("----------------------");
     }
 
     protected override void RemoveBoost() {
 
         // nema uvjeta kao kod Speed Boost jer je Damage Boost stackable
 
-        Debug.Log("Damage Boost removed. Time = " + Time.time);
+        //Debug.Log("Damage Boost removed. Time = " + Time.time);
         playerShoot.damage -= damageBoostAddition;
         Destroy(this);
 
         boostDict[myBoostType]--;
-        Debug.Log("Damage Boost Count = " + boostDict[myBoostType]);
-        Debug.Log("Damage = " + playerShoot.damage);
-        Debug.Log("----------------------");
+        //Debug.Log("Damage Boost Count = " + boostDict[myBoostType]);
+        //Debug.Log("Damage = " + playerShoot.damage);
+        //Debug.Log("----------------------");
     }
 }
 

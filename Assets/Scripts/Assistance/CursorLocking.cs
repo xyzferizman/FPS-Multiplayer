@@ -2,47 +2,41 @@ using UnityEngine;
 using MLAPI;
 using Photon.Pun;
 
-public class CursorLocking : NetworkBehaviour
+public class CursorLocking : MonoBehaviour
 {
     private string myNetType;
+    private GameObject localPlayer;
 
-    private void Start()
+    public void SetLocalPlayer(GameObject _localPlayer)
     {
-        // figuring out the network type
-        myNetType = PlayerPrefs.GetString("networkType");
-
-        if (myNetType == "mlapi")
-        {
-            if (!IsLocalPlayer)
-            {
-                enabled = false;
-            }
-        }
-        else if (myNetType == "pun_v2")
-        {
-            // if not pun local player, disable script
-            if (!GetComponent<PhotonView>().AmOwner)
-                enabled = false;
-        }
+        localPlayer = _localPlayer;
     }
 
+    #region novo
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) )
         {
             if (Cursor.lockState == CursorLockMode.Locked)
             {
                 Cursor.lockState = CursorLockMode.None;
-                GetComponentInChildren<PlayerShoot>().enabled = false;
-                GetComponentInChildren<PlayerLook>().enabled = false;
+                if (localPlayer != null)
+                {
+                    localPlayer.GetComponentInChildren<PlayerShoot>().enabled = false;
+                    localPlayer.GetComponentInChildren<PlayerLook>().enabled = false;
+                }                    
             }
             else if (Cursor.lockState == CursorLockMode.None)
             {
                 Cursor.lockState = CursorLockMode.Locked;
-                GetComponentInChildren<PlayerShoot>().enabled = true;
-                GetComponentInChildren<PlayerLook>().enabled = true;
+                if (localPlayer != null)
+                {
+                    localPlayer.GetComponentInChildren<PlayerShoot>().enabled = true;
+                    localPlayer.GetComponentInChildren<PlayerLook>().enabled = true;
+                }
             }
         }
     }
+    #endregion
 
 }

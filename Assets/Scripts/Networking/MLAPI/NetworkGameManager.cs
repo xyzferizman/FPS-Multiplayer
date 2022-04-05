@@ -31,7 +31,7 @@ public class NetworkGameManager : NetworkBehaviour
     private void Start()
     {
         listOfRPCRoundTimes = new List<double>();
-        UIPanel = FindObjectOfType<RespawnUI>().gameObject;
+        UIPanel = GameObject.FindGameObjectWithTag("Respawn");
         countdownText = UIPanel.transform.GetChild(0).gameObject.GetComponent<Text>();
         respawnButton = UIPanel.transform.GetChild(1).gameObject.GetComponent<Button>();
         respawner = FindObjectOfType<Respawn>();
@@ -41,7 +41,8 @@ public class NetworkGameManager : NetworkBehaviour
     internal void PlayerDestroyed_ClientRpc(ClientRpcParams clientRpcParams = default)
     {
         // detach camera
-        respawnCamera = myLocalMlapiPlayer.GetComponentInChildren<Camera>();    
+        respawnCamera = myLocalMlapiPlayer.GetComponentInChildren<Camera>();
+        respawnCamera.GetComponent<PlayerLook>().enabled = false;
         respawnCamera.transform.parent = null;
 
         // detachati kameru svom lokalnom player objectu, pa javiti serveru da moze unistiti player object

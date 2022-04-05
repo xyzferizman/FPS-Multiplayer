@@ -24,8 +24,11 @@ public class PlayerLook : MonoBehaviour
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        gun.transform.localRotation = Quaternion.Euler(0f, -90f, -90f - xRotation);
+        if ( gun != null )
+            gun.transform.localRotation = Quaternion.Euler(0f, -90f, -90f - xRotation);
+
         transform.localRotation = Quaternion.Euler(xRotation, 0f ,0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        if ( playerBody != null )
+            playerBody.Rotate(Vector3.up * mouseX);
     }
 }

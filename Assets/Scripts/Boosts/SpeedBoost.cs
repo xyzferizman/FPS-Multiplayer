@@ -26,7 +26,7 @@ class SpeedBoost : Boost
     internal override void ApplyBoost()  
     {                
         startTime = Time.time;
-        Debug.Log("Apply Speed Boost invoked. Time = " + startTime);
+        //Debug.Log("Apply Speed Boost invoked. Time = " + startTime);
 
         /// speedboost nije stackable, dakle ako postoji vec neki speed boost, samo "overwritaj" stari boost,
         /// tj zadrzi isti boost i pomakni vrijeme micanja boosta za 'duration'
@@ -35,7 +35,7 @@ class SpeedBoost : Boost
         if ( boostDict[myBoostType] == 0 )
         {
             playerMove.movementSpeed += speedBoostAddition;
-            Debug.Log("Speed Boost applied. Time = " + startTime);            
+            //Debug.Log("Speed Boost applied. Time = " + startTime);            
         }
         // inace produzi trajanje boosta (RemoveBoost metoda se brine za to)
         else
@@ -45,9 +45,9 @@ class SpeedBoost : Boost
 
         Invoke(nameof(RemoveBoost), duration);
         boostDict[myBoostType]++;
-        Debug.Log("Speed Boost Count = " + boostDict[myBoostType]);
-        Debug.Log("Movement Speed = " + playerMove.movementSpeed);
-        Debug.Log("----------------------");
+        //Debug.Log("Speed Boost Count = " + boostDict[myBoostType]);
+        //Debug.Log("Movement Speed = " + playerMove.movementSpeed);
+        //Debug.Log("----------------------");
     }
     
     protected override void RemoveBoost()

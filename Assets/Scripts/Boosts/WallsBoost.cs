@@ -19,7 +19,7 @@ class WallsBoost : Boost
         {
             playerMove.canGoThroughWalls = true;
             playerMove.AllowMovingThroughWalls();
-            Debug.Log("Walls Boost applied. Time = " + startTime);
+            //Debug.Log("Walls Boost applied. Time = " + startTime);
             boostDict[myBoostType]++;
 
             Invoke(nameof(RemoveBoost), duration);
@@ -42,7 +42,7 @@ class WallsBoost : Boost
 
         playerMove.canGoThroughWalls = false;
         playerMove.DisableGoingThroughWalls();
-        Debug.Log("Walls Boost removed. Time = " + Time.time);
+        //Debug.Log("Walls Boost removed. Time = " + Time.time);
         Destroy(this);
 
         boostDict[myBoostType]--;

@@ -1,4 +1,6 @@
 using UnityEngine;
+using MLAPI;
+using UnityEngine.SceneManagement;
 
 namespace DebugStuff
 {
@@ -36,15 +38,21 @@ namespace DebugStuff
 
         void OnGUI()
         {
-            //if (!Application.isEditor /*&& SceneManager.GetActiveScene().buildIndex == 1*/) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
-            //{
-            //    myLog = GUI.TextArea(new Rect(300, 10, 300, 150), myLog);
-            //    //if (GUILayout.Button("Reset output")) myLog = "";
-            //    //if (GUILayout.Button("Move +X")) FindPlayerObj(2).transform.position += new Vector3(0.5f, 0f, 0f);
-            //    //if (GUILayout.Button("Move -X")) FindPlayerObj(2).transform.position += new Vector3(-0.5f, 0f, 0f);
-            //    //if (GUILayout.Button("Move +Z")) FindPlayerObj(2).transform.position += new Vector3(0f, 0f, 0.5f);
-            //    //if (GUILayout.Button("Move -Z")) FindPlayerObj(2).transform.position += new Vector3(0f, 0f, -0.5f);
-            //}
+            if (/*!Application.isEditor*/true /*&& SceneManager.GetActiveScene().buildIndex == 1*/) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
+            {
+                myLog = GUI.TextArea(new Rect(300, 10, 300, 150), myLog);
+                if (GUILayout.Button("Reset output")) myLog = "";
+                if (GUILayout.Button("Disconnect client"))
+                {
+                    NetworkManager.Singleton.StopClient();
+                    //SceneManager.LoadScene(0);
+                }
+                
+                //if (GUILayout.Button("Move +X")) FindPlayerObj(2).transform.position += new Vector3(0.5f, 0f, 0f);
+                //if (GUILayout.Button("Move -X")) FindPlayerObj(2).transform.position += new Vector3(-0.5f, 0f, 0f);
+                //if (GUILayout.Button("Move +Z")) FindPlayerObj(2).transform.position += new Vector3(0f, 0f, 0.5f);
+                //if (GUILayout.Button("Move -Z")) FindPlayerObj(2).transform.position += new Vector3(0f, 0f, -0.5f);
+            }
 
         }
         //#endif
