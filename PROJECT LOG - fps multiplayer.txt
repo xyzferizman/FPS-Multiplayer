@@ -1,0 +1,96 @@
+TODO:
+* sredit mehaniku spawnanja pickupova
+* networkati pickupove
+* Server_DCClient_or_Shutdown PlayerPrefs atribut je hardkodiran, možda napraviti neku static klasu koja sadržava te bitne konstante
+* razmotrit mogucnost apstrahiranja provjera u kodu za "stackable" i "non-stackable" boostove (jer imam code-repetition)
+* pozabaviti se poznatim bugovima
+	- pogađanje samog sebe projektilima pri kretanju unazad (pri nekom networking solutionu, nez možda je PUN2 a ne MLAPI)
+	- čudno ponašanje/kretanje playera na rubu slope-a
+
+* dodati powerupove (brzina, damage, prolaženje kroz prepreke itd.)
+	- brzina	DONE
+	- damage	DONE
+	- prolaženje kroz zidove
+
+* dodati granate
+
+* Quality Assurance (QA)
+	- fixati poznate bugove
+	- probati pronaći nepoznate bugove playtestanjem
+	- probati pronaći nepoznate bugove reviewanjem koda i okruzenja te brainstormanjem
+
+* dodati art i "ušminkati"
+
+DOING:
+* utvrditi što se točno događa na klijentu (same PC, remote PC) kada se MLAPI Server samo najednom ugasi (sigurno se poziva OnDestroy na klijentima, te onda i InitializeRespawnCountdown)
+	* implementirati OnClientDisconnectCallback na hostu i klijentu, sa prikladnim radnjama na Disconnectu -- DONE
+		* testirati scenarije (i gdje konkretno se zove kod callbacka)
+			* server abrupt shutdown (called on all connected client)
+			* server disconnects client (called on disconnected client and the server)
+			* client abrupt shutdown -- DONE (called only on server)
+			* client disconnects itself from server -- DONE (called only on server)
+	https://docs-multiplayer.unity3d.com/docs/0.1.0/api/MLAPI.NetworkManager/index.html#onclientdisconnectcallback
+		
+DONE:
+* implementirati apstrakciju boostova do kraja
+	- C# teorija
+		https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/inheritance	-- DONE
+		https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/abstract -- DONE
+		https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/virtual -- DONE
+		https://docs.microsoft.com/en-us/dotnet/csharp/fundamentals/object-oriented/polymorphism -- DONE
+		https://www.tutlane.com/tutorial/csharp/csharp-encapsulation -- DONE
+	- praktični dio (implementacija)
+		- odlučit što sa MonoBehaviour i "new" keyword problemom -- DONE
+		- vidjet zašto baca NullRef na speed pickupu -- DONE
+		- razmislit moze li se kako popraviti rjesenje da je Boost instanciran kao instanca skripte na Playeru -- DONE
+		- implementirat Damage Boost -- DONE
+* zasad "pluggati" Walls Boost -- DONE
+* napravit da lik puca kontinuirano dok se drzi klik miša (zasad je samo na klik pucanj) -- DONE
+* osposobiti inter-PC multiplayer -- DONE
+* zamijeni RespawnUI sa tagom -- DONE
+* premjestiti Cursor Locking skriptu negdje drugdje (da se sprijeci bug kad Player Object bude destroyed da se nemoze promijeniti cursor locking nakon cega se nemoze stisnuti Respawn) -- DONE
+* riješiti bug gdje PlayerLook skripta na kameri baca error nakon unistenja Player Objecta (jer trazi Gun objekt kojeg vise nema) -- DONE
+* utvdriti zašto se "snappa" pozicija i rotacija kamere na unistenju lokalnog Player Objecta -- DONE
+* testirati novi Cursor Locking feature -- DONE
+* utvrditi zašto ne radi kod za prevenciju spawnanja pickupa unutar prepreke i applyati fix -- DONE
+* napraviti GUI podršku za "You got disconnected by the server" message u Main Menu -- DONE
+
+NOTES:
+* Cursor Locking radi samo za MLAPI rjesenje (jer zasad nema potrebe da se implementira za PUN2 i Transport jer tako i tako se nece koristiti)
+* na spawnu Y koord je 1.00, cim krene kretanje promijeni se na 1.08
+* vidi se stereotip kod boostova, GetStereotipniBoost, RemovajStereotipniBoost (to bi trebalo napraviti apstrakciju)
+
+TEORIJA: 
+- SOLID principi
+- Unity korutine
+- nemogućnost zvanja GetComponent iz konstruktora, kaže u erroru "vidjeti Script Serialization"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+BACKLOG:
+* staviti kod koji meddla sa fizikom u FixedUpdate metodu (kretanje projektila mi pada na pamet npr.) ( jel ovo treba uopće? )
+* implementirat Walls Boost
+			- razmislit kako ovo najbolje implementirat (IDEJE:) -- NAĐEN 1 SOLUTION (za prolazenje kroz zidove)
+				- sve prepreke imaju Layer = Obstacles i deaktivirati kolizije između Player i Obstacles layera (PROBLEM: što sa drugim igračima? FIX: Lokalno bi samo 1 igrač trebao imati kontrolu dok se ostali syncaju preko mreže)
+					- skuzit zasto se i dalje desava kolizija izmedju Player i Obstacles layera nakon sto sam je disable-ao (vjv character controller komponenta) -- DONE
+					- ŠTO AKO je Player Object potpuno ili djelomično unutar objekta u trenutku prestanka Wall Boosta? -- IN PROGRESS
+						- ideja 1: instant-snap -- IN PROGRESS
+							- 11: u točku izvan collidera blisku najbližem rubu collidera -- IN PROGRESS
+							- 12: u točku izvan collidera blisku točci na pravcu od Player Objecta do centra objekta unutar kojeg se Player Object nalazi
+						- ideja 2: lerping
+							- 21: u točku izvan collidera blisku najbližem rubu collidera
+							- 12: u točku izvan collidera blisku točci na pravcu od Player Objecta do centra objekta unutar kojeg se Player Object nalazi
+			- zasad stavi da se nemoze pucat dok si u zidu (ili nade-ove bacat itd.)
