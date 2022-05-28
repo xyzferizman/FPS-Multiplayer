@@ -40,13 +40,33 @@ namespace DebugStuff
         {
             if (/*!Application.isEditor*/true /*&& SceneManager.GetActiveScene().buildIndex == 1*/) //Do not display in editor ( or you can use the UNITY_EDITOR macro to also disable the rest)
             {
+                string result = "";
+
+                if (NetworkManager.Singleton.IsHost)
+                    result = "Host";
+                else
+                    result = "Client";
+
                 myLog = GUI.TextArea(new Rect(300, 10, 300, 150), myLog);
                 if (GUILayout.Button("Reset output")) myLog = "";
-                if (GUILayout.Button("Disconnect client"))
+                if (GUILayout.Button("Disconnect own client"))
                 {
                     NetworkManager.Singleton.StopClient();
                     //SceneManager.LoadScene(0);
                 }
+                if ( NetworkManager.Singleton.IsHost )
+                {
+                    foreach (var client in NetworkManager.Singleton.ConnectedClients)
+                    {
+                        if (GUILayout.Button("Disconnect Client " + client.Key))
+                        {
+                            NetworkManager.Singleton.DisconnectClient(client.Key);
+                            break;
+                        }
+                    }
+                }
+                
+                GUILayout.TextArea(result);
                 
                 //if (GUILayout.Button("Move +X")) FindPlayerObj(2).transform.position += new Vector3(0.5f, 0f, 0f);
                 //if (GUILayout.Button("Move -X")) FindPlayerObj(2).transform.position += new Vector3(-0.5f, 0f, 0f);

@@ -7,9 +7,14 @@ public class MainMenu : MonoBehaviour
 {
     public Dropdown dropdown;
     public Text label;
+    public GameObject errorImage;
+
+    float errorTextDuration = 5f;
 
     private void Start()
     {
+        #region stari_GUI
+        /*
         dropdown.options.Clear();
         List<string> items = new List<string>();
         items.Add("Unity - MLAPI");
@@ -24,6 +29,20 @@ public class MainMenu : MonoBehaviour
         //DropdownItemSelected(dropdown);
        
         dropdown.onValueChanged.AddListener(delegate { DropdownItemSelected(dropdown); });
+        */
+        #endregion
+    
+        if ( PlayerPrefs.GetInt("Server_DCClient_or_Shutdown") == 1)    {
+            errorImage.GetComponentInChildren<Text>().text = "You got disconnected by the server or server shutdown happened.";
+            errorImage.SetActive(true);
+            Invoke("RemoveErrorImage",errorTextDuration);
+            PlayerPrefs.SetInt("Server_DCClient_or_Shutdown",0);
+        }
+    }
+
+    private void RemoveErrorImage() {
+        errorImage.GetComponentInChildren<Text>().text = string.Empty;
+        errorImage.SetActive(false);
     }
 
     private void DropdownItemSelected(Dropdown dropdown)

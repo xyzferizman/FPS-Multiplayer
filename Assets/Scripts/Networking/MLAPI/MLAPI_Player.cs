@@ -20,6 +20,7 @@ public class MLAPI_Player : NetworkBehaviour
     private int respawnTimer = 5;
     private NetworkGameManager myNetGameManager;
     private Respawn respawner;
+    private bool disconnectCallbackAlreadyHappened;
 
     NetworkStarter ns;
 
@@ -59,12 +60,22 @@ public class MLAPI_Player : NetworkBehaviour
         // 2) server se shut downao
     void OnClientDisconnected(ulong clientid)
     {
-        if ( IsClient )
+        Debug.Log("on client disconnected called for cliendid = " + clientid + " on client player object " + OwnerClientId);
+
+        if (disconnectCallbackAlreadyHappened)
         {
-            SceneManager.LoadScene(0);  // ucitaj main menu
-            Debug.Log("You got disconnected by the server or server shutdown happened.");
-        }
-        
+            Debug.Log("return condition passed (disconnect callback already happened)");
+            return;
+        }        
+
+        disconnectCallbackAlreadyHappened = true;
+
+        if (IsHost)
+            return;
+
+        PlayerPrefs.SetInt("Server_DCClient_or_Shutdown",1);
+        SceneManager.LoadScene(0);  // ucitaj main menu
+        Debug.Log("You got disconnected by the server or server shutdown happened.");
     }
 
     public override void NetworkStart()
@@ -76,7 +87,8 @@ public class MLAPI_Player : NetworkBehaviour
         netObj = GetComponent<NetworkObject>();
         respawner = FindObjectOfType<Respawn>();
 
-        NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+        if (IsOwner) // inace se poziva na svim MLAPI_Player instancama u lokalnoj sceni
+            NetworkManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
 
         if ( !IsLocalPlayer )
         { 
